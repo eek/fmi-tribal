@@ -1,0 +1,15 @@
+.village {
+	background-image: url('/assets/base/back_none.jpg');
+	margin: 25px;
+	display: inline-block;
+}
+
+.details {
+	display: inline-block;
+	vertical-align: top;
+	margin: 25px 0;
+	text-transform: capitalize;
+} 
+.details img {
+	margin-right: 5px;
+}

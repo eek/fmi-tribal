@@ -1,18 +1,43 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import Reflux from 'reflux';
+import GlobalStore from './Store/GlobalStore';
+import GlobalActions from './Store/GlobalActions';
 
-class Home extends Component {
+class Home extends Reflux.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {};
+    this.store = GlobalStore;
+  }
+
+  setNicknameAndStart = () => {
+    GlobalActions.setUsernameAndStart(this.nickname.value, this.props.history);
+  }
+
   render() {
+    
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div className="home">
+        <h1>Please enter your nickname!</h1>
+        {
+          this.state.username === 'N/A'
+        ? 
+          <div>
+            <input ref={
+              (el) => {
+                this.nickname = el;
+              }
+            } type="text" placeholder="Your nickname" />
+            <button onClick={this.setNicknameAndStart}>
+              Randomly set me on the map
+            </button>
+          </div>
+         : 
+          <div>
+            Welcome back {this.state.username}
+          </div>   
+        }
       </div>
     );
   }
