@@ -24,6 +24,16 @@ export default class GlobalStore extends Reflux.Store {
 
 		this.listenables = GlobalActions;
 		window.GlobalActions = GlobalActions;
+		this.initIntervals();
+	}
+
+	initIntervals() {
+		this.goldIncrease = setInterval(() => {
+			const village = this.state.village;
+			village.gold += village.peasants;
+
+			this.saveAndSetAction({ village });
+		}, 60000 / this.state.village.peasants)
 	}
 
 	saveAndSetAction(state) {
